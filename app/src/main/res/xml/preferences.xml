@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="@string/pref_album_sort_order_key"
+        android:title="@string/title_pref_album_sort_order"
+        android:summary="@string/summary_pref_album_sort_order"
+        android:dialogTitle="@string/title_pref_album_sort_order"
+        android:entries="@array/album_sort_choices"
+        android:entryValues="@array/album_sort_pref_keys"
+        android:defaultValue="@string/default_sort_order"/>
+
+</PreferenceScreen>

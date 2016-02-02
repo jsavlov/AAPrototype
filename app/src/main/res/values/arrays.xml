@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="album_sort_choices">
+        <item>Name (Ascending)</item>
+        <item>Date Added (Ascending)</item>
+    </string-array>
+
+    <string-array name="album_sort_pref_keys">
+        <item>sort_name_asc</item>
+        <item>sort_dateadded_asc</item>
+    </string-array>
+
+    <string-array name="artwork_button_options">
+        <item>Download from Internet</item>
+        <item>Choose from Library</item>
+        <item>Clear Album Artwork</item>
+        <item>Cancel</item>
+    </string-array>
+    
+
+</resources>

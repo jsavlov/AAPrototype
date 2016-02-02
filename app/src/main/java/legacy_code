@@ -1,0 +1,106 @@
+This code is from AlbumFragment:
+
+Log.v(TAG + "/mAdapter", "getView()");
+                AAAlbum currentAlbum = this.getItem(position);
+                String albumName = currentAlbum.getAlbumName();
+                String albumArtist = currentAlbum.getAlbumArtistName();
+                int songCount = currentAlbum.getSongCount(); // For possible future use
+
+                AlbumHolder holder = null;
+
+                //View row = convertView;
+                AlbumRowView row = (AlbumRowView) convertView;
+
+                /*
+                if (row == null) {
+                    Log.v(TAG, "row was null");
+                    row = AlbumRowView.inflate(parent);
+                    LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+                    row = inflater.inflate(R.layout.album_row_layout, parent, false);
+
+                    holder = new AlbumHolder();
+
+                    holder.albumArtworkImage = (ImageView) row.findViewById(R.id.albumArt);
+                    holder.albumNameView = (TextView) row.findViewById(R.id.albumName);
+                    holder.artistNameView = (TextView) row.findViewById(R.id.artistName);
+
+                    row.setTag(holder);
+                } else {
+                    Log.v(TAG, "row = " + row.toString());
+                    holder = (AlbumHolder) row.getTag();
+                }
+
+                /**
+                 * TODO: Set the album name text so it fits cleanly on one row
+                 *
+                 * Read up on sizing the views and what not, it can surely be done.
+                 */
+
+                // Set the album name text view.
+                // If it takes up greater than 1 line, make the text smaller in size.
+                holder.albumNameView.setText(albumName);
+                final TextView testTextView = holder.albumNameView;
+
+                boolean isViewInLayout = row.isInLayout();
+                Log.v(TAG, "isViewInLayout = " + isViewInLayout);
+
+                holder.albumNameView.requestLayout();
+
+                Log.v(TAG, "linecount = " + holder.albumNameView.getLineCount());
+
+
+
+                /*
+                holder.albumNameView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Get the display metrics to determine the screen's pixel density
+                        DisplayMetrics dm = ApplicationMain.getInstance().getApplicationContext().getResources().getDisplayMetrics();
+                        float albumNameTextSize = testTextView.getTextSize() / dm.density;
+                        final float reductionFactor = 0.8f;
+                        Log.v(TAG, "startingTextSize: " + albumNameTextSize);
+                        Log.v(TAG, "line count: " + testTextView.getLineCount());
+                        int i = 0;
+                        int lineCount = testTextView.getLineCount();
+                        float newTextSize;
+                        while (testTextView.getLineCount() > 2) {
+                            newTextSize = albumNameTextSize * reductionFactor;
+                            testTextView.setTextSize(newTextSize);
+                            albumNameTextSize = testTextView.getTextSize();
+                            testTextView.invalidate();
+                            i++;
+                        }
+                        Log.v(TAG, "endingTextSize: " + testTextView.getTextSize());
+                    }
+                });
+                */
+
+
+                // Set the text for the album artist, second row
+                holder.artistNameView.setText(albumArtist);
+                int artistNameViewHeight = holder.artistNameView.getHeight();
+                int albumNameViewHeight = holder.albumNameView.getHeight();
+
+                int rowHeight = row.getHeight(); // height of the row
+
+                String albumArtPath = currentAlbum.getAlbumArtPath();
+                Bitmap rawAlbumArtBitmap = null;
+                if (albumArtPath != null) {
+                    //BitmapFactory.Options ops = new BitmapFactory.Options();
+                    //ops.inSampleSize = 4; // Size the image to a quarter of its current size
+                    //rawAlbumArtBitmap = BitmapFactory.decodeFile(albumArtPath, ops);
+                    rawAlbumArtBitmap = BitmapFactory.decodeFile(albumArtPath);
+
+                }
+
+                // If the bitmap was created from the file, set the albumArtworkImage bitmap
+                // to rawAlbumArtBitmap.
+                if (rawAlbumArtBitmap != null) {
+                    Log.v(TAG, "rawAlbumArtBitmap height: " + rawAlbumArtBitmap.getHeight());
+                    holder.albumArtworkImage.setImageBitmap(rawAlbumArtBitmap);
+                    Log.v(TAG, "holder.albumArtworkImage bitmap set. Bitmap view height: " + holder.albumArtworkImage.getHeight() + ", row height: " + row.getHeight());
+
+                }
+                return row;
+
+            }

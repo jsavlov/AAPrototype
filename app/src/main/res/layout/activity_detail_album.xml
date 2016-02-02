@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.jasonsavlov.aaprototype.activity.DetailAlbumActivity">
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="com.jasonsavlov.aaprototype.ui.DetailAlbumTopFragment"
+        android:id="@+id/detail_top_fragment"
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="30%"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="com.jasonsavlov.aaprototype.ui.SongDetailListFragment"
+        android:id="@+id/detail_list_fragment"
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="70%"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/detail_top_fragment"
+        />
+
+</android.support.percent.PercentRelativeLayout>

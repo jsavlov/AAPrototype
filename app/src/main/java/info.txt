@@ -1,0 +1,16 @@
+Stuff to do:
+
+* Make AAMediaManager parcelable. Save the instance variables to a parcel so it can be used across
+    changes to the UI (orientation changes, keyboard showing, etc).
+
+To fix:
+* Orientation issues - app crashes when the user moves the screen to another orientation.
+    Orientation should be locked to portrait mode for the entire experience of the app.
+
+Thoughts:
+
+* Should the keys for albums/artists be by unique ID generated from the MediaStore, or the actual album
+    names themselves?
+
+Ideas:
+* Allow the user to pick album art thumbnail size for the AlbumFragment listview?
