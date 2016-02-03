@@ -219,12 +219,7 @@ public class AAAlbum implements Parcelable, Comparable
     {
         // TODO: Implement a default album artwork bitmap image
 
-       /* if (defaultBitmap == null) {
-            BitmapDrawable bd = (BitmapDrawable) ApplicationMain.getInstance().getResources().getDrawable(R.drawable.tag2);
-            defaultBitmap = bd.getBitmap();
-        }*/
 
-        //return defaultBitmap;
         return null;
     }
 
