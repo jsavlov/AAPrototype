@@ -77,6 +77,30 @@ public class DetailAlbumActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int which)
             {
                 Log.d(TAG, "Item clicked: " + which);
+                /*
+                    This is where the action happens when the album artwork button is clicked.
+                    The following options will pop up in the following order
+                    (Index of 'which' used, starting at 0):
+                    0: Download from Musicbrainz
+                    1: Choose from photo library
+                    2: Clear album artwork (if present)
+                    3: Cancel (close the window and do nothing)
+                 */
+
+                switch (which) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        // This should never be reached except in the presence of an error
+                        break;
+                }
+
             }
         });
         aBuilder.show();
