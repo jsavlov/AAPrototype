@@ -146,7 +146,11 @@ public class DetailAlbumActivity extends AppCompatActivity
         protected void onPostExecute(List<Bitmap> list) {
             super.onPostExecute(list);
 
-            Log.d(TAG, "Done executing");
+            if (list != null) {
+                Toast.makeText(DetailAlbumActivity.this, "Artwork fetched successfully!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(DetailAlbumActivity.this, "Error fetching album artwork. See logs.", Toast.LENGTH_LONG).show();
+            }
         }
 
         @Override
