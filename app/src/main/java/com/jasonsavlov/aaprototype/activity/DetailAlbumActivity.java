@@ -171,6 +171,7 @@ public class DetailAlbumActivity extends AppCompatActivity
             try {
                 String artistID = getArtistID(album.getAlbumArtist());
                 if (artistID.equals(LIMIT_EXCEEDED_KEY)) {
+                    Log.d(TAG, "Error: limit exceeded");
                     return null;
                 }
                 urlString = "ws/2/release/?query=release:\""
@@ -235,6 +236,7 @@ public class DetailAlbumActivity extends AppCompatActivity
 
             Element releaseListElement = (Element) xmlDocument.getElementsByTagName("release-list").item(0);
             int releaseCount = Integer.parseInt(releaseListElement.getAttribute("count"));
+            Log.d(TAG, "Release count is " + releaseCount);
 
             NodeList releaseNodes = releaseListElement.getElementsByTagName("release");
 
@@ -387,7 +389,6 @@ public class DetailAlbumActivity extends AppCompatActivity
                 case 503:
                     responseCode = FetchedResponseCode.EXCEEDED_LIMIT;
                     break;
-                // TODO: Handle the other response codes
                 default:
                     // So the status code isn't anything we know about? WTF, man?!
                     Log.d(TAG, "Response code error. status_code = " + status_code);
