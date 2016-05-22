@@ -1,0 +1,7 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          class="com.jasonsavlov.aaprototype.ui.ShowDownloadedArtworkActivityFragment"
+          android:id="@+id/artwork_grid_fragment"
+          tools:layout="@layout/fragment_show_downloaded_artwork"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>

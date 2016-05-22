@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.jasonsavlov.aaprototype"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jasonsavlov.aaprototype" >
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ApplicationMain"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChooseAlbumActivity">
+        <activity android:name=".activity.ChooseAlbumActivity" >
         </activity>
-        <activity android:name=".activity.DetailAlbumActivity">
+        <activity android:name=".activity.DetailAlbumActivity" >
         </activity>
-        <activity android:name=".activity.SettingsActivity">
+        <activity android:name=".activity.SettingsActivity" >
+        </activity>
+        <activity
+            android:name=".activity.ShowDownloadedArtworkActivity"
+            android:label="@string/title_activity_show_downloaded_artwork" >
         </activity>
     </application>
 

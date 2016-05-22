@@ -2,6 +2,7 @@ package com.jasonsavlov.aaprototype.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -57,6 +58,8 @@ public class DetailAlbumActivity extends AppCompatActivity
 
     private final String LIMIT_EXCEEDED_KEY = "503 ERROR";
 
+    public static List<Bitmap> imageList = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -93,7 +96,7 @@ public class DetailAlbumActivity extends AppCompatActivity
     {
         // TODO: Implement initial steps in manipulating the artwork image
         Log.d(TAG, "artworkImageButtonClicked: button was clicked!");
-        Toast.makeText(this, "This feature is under construction...", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "This feature is under construction...", Toast.LENGTH_SHORT).show();
 
         AlertDialog.Builder aBuilder = new AlertDialog.Builder(this);
         aBuilder.setTitle("Choose an Option...");
@@ -147,7 +150,10 @@ public class DetailAlbumActivity extends AppCompatActivity
             super.onPostExecute(list);
 
             if (list != null) {
-                Toast.makeText(DetailAlbumActivity.this, "Artwork fetched successfully!", Toast.LENGTH_LONG).show();
+                DetailAlbumActivity.imageList = list;
+                //Toast.makeText(DetailAlbumActivity.this, "Artwork fetched successfully!", Toast.LENGTH_LONG).show();
+                Intent artworkListIntent = new Intent(DetailAlbumActivity.this, ShowDownloadedArtworkActivity.class);
+                DetailAlbumActivity.this.startActivity(artworkListIntent);
             } else {
                 Toast.makeText(DetailAlbumActivity.this, "Error fetching album artwork. See logs.", Toast.LENGTH_LONG).show();
             }
