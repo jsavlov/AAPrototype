@@ -60,6 +60,8 @@ public class DetailAlbumActivity extends AppCompatActivity
 
     public static List<Bitmap> imageList = null;
 
+    private FetchError fetchErrorReason = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -142,6 +144,7 @@ public class DetailAlbumActivity extends AppCompatActivity
 
         @Override
         protected void onPreExecute() {
+            // TODO: Display a ProgressDialog letting the user know artwork is being downloaded
             super.onPreExecute();
         }
 
@@ -268,6 +271,7 @@ public class DetailAlbumActivity extends AppCompatActivity
                     e.printStackTrace();
                     return null;
                 } catch (ExecutionException e) {
+                    e.printStackTrace();
                     return null;
                 }
 
@@ -436,6 +440,10 @@ public class DetailAlbumActivity extends AppCompatActivity
         int getValue() {
             return this.value;
         }
+    }
+
+    private enum FetchError {
+        LIMIT_EXCEEDED, IO_FAILURE
     }
 
     private class FetchedArtworkHolder {

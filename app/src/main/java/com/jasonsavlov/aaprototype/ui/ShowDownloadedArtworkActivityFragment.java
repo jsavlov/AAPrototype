@@ -1,13 +1,14 @@
 package com.jasonsavlov.aaprototype.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.DisplayMetrics;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -83,23 +84,42 @@ public class ShowDownloadedArtworkActivityFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             // The ImageView that will be returned
             ImageView imageView;
+
+            ArtworkGridCellView gridCellView;
             if (convertView == null) {
                 // if we don't have a view from the recycling guys, make our own!
-                imageView = new ImageView(mContext);
+                /*imageView = new ImageView(mContext);
                 imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(8, 8, 8, 8);
+                imageView.setPadding(8, 8, 8, 8);*/
+
+                gridCellView = ArtworkGridCellView.inflate(parent);
+
             } else {
                 // Use the recycled view
-                imageView = (ImageView) convertView;
+                //imageView = (ImageView) convertView;
+                gridCellView = (ArtworkGridCellView) convertView;
             }
+
+            WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+            Display mDisplay = wm.getDefaultDisplay();
+            DisplayMetrics dims = new DisplayMetrics();
+            mDisplay.getMetrics(dims);
+
+            int thirds = dims.widthPixels / 3;
+
 
             if (DetailAlbumActivity.imageList == null)
                 throw new NullPointerException("imageList in DetailAlbumActivity was never set...");
 
-            imageView.setImageBitmap(DetailAlbumActivity.imageList.get(position));
+            //imageView.setImageBitmap(DetailAlbumActivity.imageList.get(position));
+            Bitmap artworkBitmap = DetailAlbumActivity.imageList.get(position);
+            gridCellView.setArtworkImageBitmap(artworkBitmap);
+            gridCellView.setDimensionTextString(ArtworkGridCellView.getDimensionStringFromDims(artworkBitmap.getWidth(), artworkBitmap.getHeight()));
+            gridCellView.setDataSizeTextString(ArtworkGridCellView.getDataSizeStringFromByteLength(artworkBitmap.getByteCount()));
 
-            return imageView;
+
+            return gridCellView;
         }
     }
 
