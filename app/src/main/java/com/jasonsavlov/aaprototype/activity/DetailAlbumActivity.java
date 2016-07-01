@@ -1,6 +1,7 @@
 package com.jasonsavlov.aaprototype.activity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -142,15 +143,22 @@ public class DetailAlbumActivity extends AppCompatActivity
 
     private class DownloadArtworkTask extends AsyncTask<AAAlbum,Integer,List<Bitmap>> {
 
+        // This is the loading dialog that is showed when the task is commenced,
+        // and disappears when the task completes, regardless of success status.
+        ProgressDialog loadingDialog;
+
         @Override
         protected void onPreExecute() {
-            // TODO: Display a ProgressDialog letting the user know artwork is being downloaded
+            // TODO: Implement a cancel function in case the user wants to abort the fetching operation
+            loadingDialog = ProgressDialog.show(DetailAlbumActivity.this, "Fetching artwork...", "Downloading artwork. Please wait...", true, false);
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(List<Bitmap> list) {
             super.onPostExecute(list);
+
+            loadingDialog.hide();
 
             if (list != null) {
                 DetailAlbumActivity.imageList = list;
@@ -159,6 +167,19 @@ public class DetailAlbumActivity extends AppCompatActivity
                 DetailAlbumActivity.this.startActivity(artworkListIntent);
             } else {
                 Toast.makeText(DetailAlbumActivity.this, "Error fetching album artwork. See logs.", Toast.LENGTH_LONG).show();
+
+                AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(DetailAlbumActivity.this);
+                errorDialogBuilder.setCancelable(false);
+                errorDialogBuilder.setTitle("Ooops!");
+                errorDialogBuilder.setMessage("An error occured while fetching artwork.");
+                errorDialogBuilder.setIconAttribute(android.R.attr.alertDialogIcon);
+                errorDialogBuilder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                errorDialogBuilder.show();
             }
         }
 
@@ -442,8 +463,28 @@ public class DetailAlbumActivity extends AppCompatActivity
         }
     }
 
+
     private enum FetchError {
-        LIMIT_EXCEEDED, IO_FAILURE
+        LIMIT_EXCEEDED, IO_FAILURE;
+
+        private String message;
+        private FetchedResponseCode responseCode;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public FetchedResponseCode getResponseCode() {
+            return responseCode;
+        }
+
+        public void setResponseCode(FetchedResponseCode responseCode) {
+            this.responseCode = responseCode;
+        }
     }
 
     private class FetchedArtworkHolder {
